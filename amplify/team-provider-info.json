@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-trilicious-staging-93748-authRole",
+      "UnauthRoleArn": "arn:aws:iam::858096804618:role/amplify-trilicious-staging-93748-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::858096804618:role/amplify-trilicious-staging-93748-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-trilicious-staging-93748-deployment",
+      "UnauthRoleName": "amplify-trilicious-staging-93748-unauthRole",
+      "StackName": "amplify-trilicious-staging-93748",
+      "StackId": "arn:aws:cloudformation:ap-south-1:858096804618:stack/amplify-trilicious-staging-93748/ad3a3ee0-5db6-11ed-9372-06a1bf471d52",
+      "AmplifyAppId": "dxoiggqowqp37"
+    }
+  }
+}

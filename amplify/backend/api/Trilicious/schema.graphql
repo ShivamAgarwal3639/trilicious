@@ -1,4 +1,4 @@
-type User @model @auth(rules: [{allow: public}]) {
+type UserData @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   number: String
@@ -9,8 +9,10 @@ type User @model @auth(rules: [{allow: public}]) {
   avatar: String
   long: Float
   lat: Float
+  authId: String!
 }
 
 type UntitledModel @model @auth(rules: [{allow: public}]) {
   id: ID!
 }
+ 

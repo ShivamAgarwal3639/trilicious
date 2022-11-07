@@ -1,18 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:math';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trilicious_social/aws_amplify/awsDatastore.dart';
 import 'dart:developer' as dev;
 
 import 'HomePage.dart';
-import 'Myhome.dart';
 
 
 class AddUserDataPage extends StatefulWidget {
-  const AddUserDataPage({Key? key}) : super(key: key);
+  const AddUserDataPage({Key? key,this.id}) : super(key: key);
+  final id;
 
   @override
   State<AddUserDataPage> createState() => _AddUserDataPageState();
@@ -294,20 +296,18 @@ class _AddUserDataPageState extends State<AddUserDataPage> {
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {
                             try {
-                              FirebaseFirestore.instance
-                                  .collection('user')
-                                  .doc(num.toString())
-                                  .set({
-                                'number': num,
-                                'avatar': '',
-                                'dob': age,
-                                'name': name,
-                                'email': mail,
-                                'date': Timestamp.now(),
-                                'locationLatData': 0,
-                                'locationLongData': 0,
-                                'block': false,
-                              }, SetOptions(merge: true));
+                              AWSAmplifyHelper.instance.saveUser(
+                                avatar: "",
+                                block: false,
+                                date: TemporalDateTime.now(),
+                                dob: age,
+                                name: name,
+                                email: mail,
+                                id: widget.id,
+                                lat: 0,
+                                long: 0,
+                                number: num,
+                              );
                             } catch (e) {
                               dev.log(e.toString());
                             } finally {

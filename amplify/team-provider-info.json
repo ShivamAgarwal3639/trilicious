@@ -10,6 +10,11 @@
       "StackName": "amplify-trilicious-staging-93748",
       "StackId": "arn:aws:cloudformation:ap-south-1:858096804618:stack/amplify-trilicious-staging-93748/ad3a3ee0-5db6-11ed-9372-06a1bf471d52",
       "AmplifyAppId": "dxoiggqowqp37"
+    },
+    "categories": {
+      "api": {
+        "Trilicious": {}
+      }
     }
   }
 }

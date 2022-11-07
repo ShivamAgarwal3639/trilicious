@@ -167,7 +167,7 @@ class _MainHomePageState extends State<MainHomePage> {
                       const Padding(
                           padding: EdgeInsets.only(
                               left: 15.0, right: 15),
-                          child: const Icon(
+                          child:  Icon(
                             Icons.location_on,
                             color: Colors.orange,
                           ))

@@ -476,53 +476,6 @@ class _LoginRegisterPageOtpState extends State<LoginRegisterPageOtp> {
               const Spacer(
                 flex: 2,
               ),
-              // TextFormField(
-              //   validator: (value) {
-              //     if (value == null ||
-              //         value.isEmpty ||
-              //         value.length < 6 ||
-              //         value.contains(" ") ||
-              //         value.contains(",") ||
-              //         value.contains(".") ||
-              //         value.contains("-")) {
-              //       return 'Please enter valid OTP';
-              //     }
-              //     return null;
-              //   },
-              //   textAlign: TextAlign.center,
-              //   cursorColor: const Color(0xffFFA800),
-              //   keyboardType: TextInputType.number,
-              //   maxLength: 6,
-              //   onChanged: (str) {
-              //     if (mounted) {
-              //       setState(() {
-              //         num = str;
-              //       });
-              //     }
-              //   },
-              //   autofocus: true,
-              //   style: const TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.w500,
-              //   ),
-              //   decoration: InputDecoration(
-              //     isDense: true,
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(12.0),
-              //     ),
-              //     //   enabledBorder: OutlineInputBorder(
-              //     //     borderSide: BorderSide(color: Colors.black12, width: 2),
-              //     //     borderRadius: BorderRadius.circular(100),
-              //     //   ),
-              //     //   focusedBorder: OutlineInputBorder(
-              //     //       borderSide:
-              //     //           BorderSide(color: Color(0xff4D4C7D), width: 2),
-              //     //       borderRadius: BorderRadius.circular(100)),
-              //   ),
-              //   inputFormatters: [
-              //     FilteringTextInputFormatter.allow(RegExp("[0-9/]")),
-              //   ],
-              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Container(

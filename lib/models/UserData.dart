@@ -23,10 +23,10 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:flutter/foundation.dart';
 
 
-/** This is an auto generated class representing the User type in your schema. */
+/** This is an auto generated class representing the UserData type in your schema. */
 @immutable
-class User extends Model {
-  static const classType = const _UserModelType();
+class UserData extends Model {
+  static const classType = const _UserDataModelType();
   final String id;
   final String? _name;
   final String? _number;
@@ -37,6 +37,7 @@ class User extends Model {
   final String? _avatar;
   final double? _long;
   final double? _lat;
+  final String? _authId;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -84,6 +85,19 @@ class User extends Model {
     return _lat;
   }
   
+  String get authId {
+    try {
+      return _authId!;
+    } catch(e) {
+      throw new AmplifyCodeGenModelException(
+          AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion:
+            AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString()
+          );
+    }
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -92,10 +106,10 @@ class User extends Model {
     return _updatedAt;
   }
   
-  const User._internal({required this.id, name, number, email, dob, date, block, avatar, long, lat, createdAt, updatedAt}): _name = name, _number = number, _email = email, _dob = dob, _date = date, _block = block, _avatar = avatar, _long = long, _lat = lat, _createdAt = createdAt, _updatedAt = updatedAt;
+  const UserData._internal({required this.id, name, number, email, dob, date, block, avatar, long, lat, required authId, createdAt, updatedAt}): _name = name, _number = number, _email = email, _dob = dob, _date = date, _block = block, _avatar = avatar, _long = long, _lat = lat, _authId = authId, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory User({String? id, String? name, String? number, String? email, String? dob, TemporalDateTime? date, bool? block, String? avatar, double? long, double? lat}) {
-    return User._internal(
+  factory UserData({String? id, String? name, String? number, String? email, String? dob, TemporalDateTime? date, bool? block, String? avatar, double? long, double? lat, required String authId}) {
+    return UserData._internal(
       id: id == null ? UUID.getUUID() : id,
       name: name,
       number: number,
@@ -105,7 +119,8 @@ class User extends Model {
       block: block,
       avatar: avatar,
       long: long,
-      lat: lat);
+      lat: lat,
+      authId: authId);
   }
   
   bool equals(Object other) {
@@ -115,7 +130,7 @@ class User extends Model {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is User &&
+    return other is UserData &&
       id == other.id &&
       _name == other._name &&
       _number == other._number &&
@@ -125,7 +140,8 @@ class User extends Model {
       _block == other._block &&
       _avatar == other._avatar &&
       _long == other._long &&
-      _lat == other._lat;
+      _lat == other._lat &&
+      _authId == other._authId;
   }
   
   @override
@@ -135,7 +151,7 @@ class User extends Model {
   String toString() {
     var buffer = new StringBuffer();
     
-    buffer.write("User {");
+    buffer.write("UserData {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("name=" + "$_name" + ", ");
     buffer.write("number=" + "$_number" + ", ");
@@ -146,6 +162,7 @@ class User extends Model {
     buffer.write("avatar=" + "$_avatar" + ", ");
     buffer.write("long=" + (_long != null ? _long!.toString() : "null") + ", ");
     buffer.write("lat=" + (_lat != null ? _lat!.toString() : "null") + ", ");
+    buffer.write("authId=" + "$_authId" + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -153,8 +170,8 @@ class User extends Model {
     return buffer.toString();
   }
   
-  User copyWith({String? id, String? name, String? number, String? email, String? dob, TemporalDateTime? date, bool? block, String? avatar, double? long, double? lat}) {
-    return User._internal(
+  UserData copyWith({String? id, String? name, String? number, String? email, String? dob, TemporalDateTime? date, bool? block, String? avatar, double? long, double? lat, String? authId}) {
+    return UserData._internal(
       id: id ?? this.id,
       name: name ?? this.name,
       number: number ?? this.number,
@@ -164,10 +181,11 @@ class User extends Model {
       block: block ?? this.block,
       avatar: avatar ?? this.avatar,
       long: long ?? this.long,
-      lat: lat ?? this.lat);
+      lat: lat ?? this.lat,
+      authId: authId ?? this.authId);
   }
   
-  User.fromJson(Map<String, dynamic> json)  
+  UserData.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _name = json['name'],
       _number = json['number'],
@@ -178,15 +196,16 @@ class User extends Model {
       _avatar = json['avatar'],
       _long = (json['long'] as num?)?.toDouble(),
       _lat = (json['lat'] as num?)?.toDouble(),
+      _authId = json['authId'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'number': _number, 'email': _email, 'dob': _dob, 'date': _date?.format(), 'block': _block, 'avatar': _avatar, 'long': _long, 'lat': _lat, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'name': _name, 'number': _number, 'email': _email, 'dob': _dob, 'date': _date?.format(), 'block': _block, 'avatar': _avatar, 'long': _long, 'lat': _lat, 'authId': _authId, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
   
   Map<String, Object?> toMap() => {
-    'id': id, 'name': _name, 'number': _number, 'email': _email, 'dob': _dob, 'date': _date, 'block': _block, 'avatar': _avatar, 'long': _long, 'lat': _lat, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+    'id': id, 'name': _name, 'number': _number, 'email': _email, 'dob': _dob, 'date': _date, 'block': _block, 'avatar': _avatar, 'long': _long, 'lat': _lat, 'authId': _authId, 'createdAt': _createdAt, 'updatedAt': _updatedAt
   };
 
   static final QueryField ID = QueryField(fieldName: "id");
@@ -199,9 +218,10 @@ class User extends Model {
   static final QueryField AVATAR = QueryField(fieldName: "avatar");
   static final QueryField LONG = QueryField(fieldName: "long");
   static final QueryField LAT = QueryField(fieldName: "lat");
+  static final QueryField AUTHID = QueryField(fieldName: "authId");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
-    modelSchemaDefinition.name = "User";
-    modelSchemaDefinition.pluralName = "Users";
+    modelSchemaDefinition.name = "UserData";
+    modelSchemaDefinition.pluralName = "UserData";
     
     modelSchemaDefinition.authRules = [
       AuthRule(
@@ -217,57 +237,63 @@ class User extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.id());
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.NAME,
+      key: UserData.NAME,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.NUMBER,
+      key: UserData.NUMBER,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.EMAIL,
+      key: UserData.EMAIL,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.DOB,
+      key: UserData.DOB,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.DATE,
+      key: UserData.DATE,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.BLOCK,
+      key: UserData.BLOCK,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.bool)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.AVATAR,
+      key: UserData.AVATAR,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.LONG,
+      key: UserData.LONG,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.double)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: User.LAT,
+      key: UserData.LAT,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.double)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: UserData.AUTHID,
+      isRequired: true,
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
@@ -286,11 +312,11 @@ class User extends Model {
   });
 }
 
-class _UserModelType extends ModelType<User> {
-  const _UserModelType();
+class _UserDataModelType extends ModelType<UserData> {
+  const _UserDataModelType();
   
   @override
-  User fromJson(Map<String, dynamic> jsonData) {
-    return User.fromJson(jsonData);
+  UserData fromJson(Map<String, dynamic> jsonData) {
+    return UserData.fromJson(jsonData);
   }
 }

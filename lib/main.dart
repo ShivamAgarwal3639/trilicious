@@ -1,12 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
+
+import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_datastore/amplify_datastore.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:trilicious_social/amplifyconfiguration.dart';
 import 'HomePage.dart';
-import 'Myhome.dart';
 import 'addUserData.dart';
+import 'aws_amplify/awsDatastore.dart';
 import 'login/loginPage.dart';
-
+import 'models/ModelProvider.dart';
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(136, 14, 79, .1),
@@ -23,11 +28,25 @@ Map<int, Color> color = {
 
 MaterialColor colorCustom = MaterialColor(0xffFFA800, color);
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await configureAmplify();
   await Firebase.initializeApp();
   runApp(const MyApp());
+}
+
+Future<void> configureAmplify() async {
+  final datastorePlugin = AmplifyDataStore(
+    modelProvider: ModelProvider.instance,
+  );
+  final api = AmplifyAPI();
+  // final auth = AmplifyAuthCognito();
+  await Amplify.addPlugins([datastorePlugin, api]);
+  try {
+    await Amplify.configure(amplifyconfig);
+  } on AmplifyAlreadyConfiguredException {
+    log('Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +64,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
 
@@ -57,10 +75,10 @@ class _LandingPageState extends State<LandingPage> {
   FirebaseAuth auth = FirebaseAuth.instance;
   var i = 0;
   var num = "";
+  var id = "";
 
   @override
   void initState() {
-    // TODO: implement initState
     getUserInstance();
     super.initState();
   }
@@ -77,6 +95,7 @@ class _LandingPageState extends State<LandingPage> {
         if (mounted) {
           setState(() {
             num = user.phoneNumber!.substring(3, 13);
+            id = user.uid.toString();
             i = 1;
           });
         }
@@ -88,21 +107,25 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return i == 0
         ? const Scaffold(
-      body: SizedBox(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    )
+            body: SizedBox(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          )
         : i == 1
-        ? LandingPage2(num: num)
-        : const LoginRegisterPage();
+            ? LandingPage2(
+                num: num,
+                id: id,
+              )
+            : const LoginRegisterPage();
   }
 }
 
 class LandingPage2 extends StatefulWidget {
-  const LandingPage2({Key? key, this.num}) : super(key: key);
+  const LandingPage2({Key? key, this.num, this.id}) : super(key: key);
   final num;
+  final id;
 
   @override
   _LandingPage2State createState() => _LandingPage2State();
@@ -119,9 +142,10 @@ class _LandingPage2State extends State<LandingPage2> {
   }
 
   getUserInstance() async {
-    var collection = FirebaseFirestore.instance.collection('user');
-    var docSnapshot = await collection.doc(widget.num).get();
-    if (docSnapshot.exists) {
+    log(widget.id);
+    bool doesExist =
+        await AWSAmplifyHelper.instance.readUserExists(id: widget.id);
+    if (doesExist) {
       if (mounted) {
         setState(() {
           docExists = true;
@@ -142,14 +166,16 @@ class _LandingPage2State extends State<LandingPage2> {
   Widget build(BuildContext context) {
     return i == 0
         ? const Scaffold(
-      body: SizedBox(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    )
+            body: SizedBox(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          )
         : docExists
-        ? const HomePage()
-        : const AddUserDataPage();
+            ? const HomePage()
+            : AddUserDataPage(
+                id: widget.id,
+              );
   }
 }

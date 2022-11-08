@@ -180,7 +180,7 @@ class ProfilePage extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return const NameCard2();
                           },
-                        )
+                        ),
                       ],
                     ),
                   ),

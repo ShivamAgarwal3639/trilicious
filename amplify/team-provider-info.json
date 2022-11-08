@@ -14,6 +14,12 @@
     "categories": {
       "api": {
         "Trilicious": {}
+      },
+      "auth": {
+        "trilicious020dcc1c": {}
+      },
+      "storage": {
+        "s3f9bd428a": {}
       }
     }
   }

@@ -36,12 +36,12 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         body: currentIndex == 0
-            ? MainHomePage()
+            ? const MainHomePage()
             : currentIndex == 1
-                ? SnackMap()
+                ? const SnackMap()
                 : currentIndex == 2
                     ? HomeScreen()
-                    : QRScanner(),
+                    : const QRScanner(),
         bottomNavigationBar: bottomNavBar(),
       ),
     );
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                       height: index == currentIndex ? displayWidth * .12 : 0,
                       width: index == currentIndex ? displayWidth * .35 : 0,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: const [
+                        gradient: const LinearGradient(colors: [
                           Color(0xffFDBD19),
                           Color(0xffFF9707),
                         ]),

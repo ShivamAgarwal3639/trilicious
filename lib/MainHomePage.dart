@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'AdBanner.dart';
 import 'ImageCard/FilterBox.dart';
 import 'ImageCard/ImageCard.dart';
+import 'NewPost.dart';
 import 'ProfilePage.dart';
 import 'ReelCards/dimsum.dart';
 import 'ReelCards/rosted.dart';
@@ -52,15 +53,14 @@ class _MainHomePageState extends State<MainHomePage> {
                       width: 20,
                       decoration: const BoxDecoration(
                         color: Colors.orangeAccent,
-                        borderRadius:  BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           bottomLeft: Radius.circular(10),
                         ),
                       ),
                       child: IconButton(
                         onPressed: () {
-                          _scaffoldKey.currentState
-                              ?.closeDrawer();
+                          _scaffoldKey.currentState?.closeDrawer();
                         },
                         icon: const Icon(
                           Icons.arrow_back_ios,
@@ -72,10 +72,11 @@ class _MainHomePageState extends State<MainHomePage> {
                   ],
                 ),
                 MaterialButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ProfilePage()),
+                      MaterialPageRoute(
+                          builder: (context) => const ProfilePage()),
                     );
                   },
                   child: Container(
@@ -104,7 +105,7 @@ class _MainHomePageState extends State<MainHomePage> {
                             const CircleAvatar(
                               backgroundColor: const Color(0xffEEABFF),
                               radius: 45.0,
-                              child:  CircleAvatar(
+                              child: CircleAvatar(
                                 radius: 40,
                                 backgroundImage: AssetImage(
                                   'assets/images/shelly.png',
@@ -152,12 +153,10 @@ class _MainHomePageState extends State<MainHomePage> {
                     border: Border.all(color: Colors.orange),
                   ),
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 15.0, right: 15),
+                        padding: const EdgeInsets.only(left: 15.0, right: 15),
                         child: AppText(
                           text: 'New Delhi',
                           size: 15,
@@ -165,9 +164,8 @@ class _MainHomePageState extends State<MainHomePage> {
                         ),
                       ),
                       const Padding(
-                          padding: EdgeInsets.only(
-                              left: 15.0, right: 15),
-                          child:  Icon(
+                          padding: EdgeInsets.only(left: 15.0, right: 15),
+                          child: Icon(
                             Icons.location_on,
                             color: Colors.orange,
                           ))
@@ -271,7 +269,14 @@ class _MainHomePageState extends State<MainHomePage> {
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const NewPost()),
+                                    );
+                          },
                           child: Container(
                             height: 90,
                             width: 140,
@@ -282,8 +287,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                   blurRadius: 8.0,
                                 ),
                               ],
-                              borderRadius:
-                              BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(24),
                               gradient: const LinearGradient(colors: [
                                 Color(0xffFDBD19),
                                 Color(0xffFF9707)
@@ -348,119 +352,122 @@ class _MainHomePageState extends State<MainHomePage> {
           ),
         ),
       ),
-      body: Stack(
-          children:[
-            ListView(children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                color: Colors.white,
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.explore,
-                          size: 35,
-                          color: Colors.grey.shade800,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        AppLargeText(
-                          text: "Explore",
-                          color: Colors.grey.shade700,
-                          size: 20,
-                        ),
-                      ],
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(17),
-                        border: Border.all(color: Colors.orange),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.location_on_rounded,
-                              color: Colors.orange,
-                              size: 15,
-                            ),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            AppText(
-                              text: 'New Delhi',
-                              size: 15,
-                              color: Colors.orange,
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 5,),
-              Container(
-                height: 350,
-                color: Colors.white,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    NameCard(),
-                    NameCard2(),
-                    NameCard(),
-                    NameCard(),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AppLargeText(
-                      text: 'Filter Content',
-                      size: 16,
-                      color: Colors.black54,
-                    ),
-                    AppText(
-                      text: "See all",
-                      color: Colors.grey.shade700,
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const FilterContent(),
-              const SizedBox(height: 20),
-              Row(
+      body: Stack(children: [
+        ListView(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              color: Colors.white,
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
-                    width: 20,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.explore,
+                        size: 35,
+                        color: Colors.grey.shade800,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      AppLargeText(
+                        text: "Explore",
+                        color: Colors.grey.shade700,
+                        size: 20,
+                      ),
+                    ],
                   ),
-                  AppLargeText(
-                    text: 'Featured Dishes',
-                    size: 15,
-                    color: Colors.grey.shade700,
-                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(17),
+                      border: Border.all(color: Colors.orange),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_rounded,
+                            color: Colors.orange,
+                            size: 15,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          AppText(
+                            text: 'New Delhi',
+                            size: 15,
+                            color: Colors.orange,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
-              const SizedBox(
-                height: 20,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 350,
+              color: Colors.white,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  NameCard(),
+                  NameCard2(),
+                  NameCard(),
+                  NameCard(),
+                ],
               ),
-              Column( children: [
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppLargeText(
+                    text: 'Filter Content',
+                    size: 16,
+                    color: Colors.black54,
+                  ),
+                  AppText(
+                    text: "See all",
+                    color: Colors.grey.shade700,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const FilterContent(),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 20,
+                ),
+                AppLargeText(
+                  text: 'Featured Dishes',
+                  size: 15,
+                  color: Colors.grey.shade700,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -484,33 +491,34 @@ class _MainHomePageState extends State<MainHomePage> {
                   ],
                 ),
               ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24)),
-                  elevation: 4,
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
-                          child: Image.asset('assets/images/MapFrame.png',
-                              height: 250, width: 390, fit: BoxFit.fitWidth),
-                        ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24)),
+                elevation: 4,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: Image.asset('assets/images/MapFrame.png',
+                            height: 250, width: 390, fit: BoxFit.fitWidth),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 100,)
-            ],
             ),
-          ]
-      ),
+            const SizedBox(
+              height: 100,
+            )
+          ],
+        ),
+      ]),
       extendBody: true,
     );
   }
